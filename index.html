@@ -100,15 +100,50 @@
     body.light .footer-info {
       color: rgba(0, 0, 0, 0.35);
     }
+
+    .section {
+      background: var(--section-bg);
+      padding: 1.5rem;
+      margin: 1.5rem auto;
+      border-radius: 12px;
+      max-width: 800px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    pre {
+      background: #2c2c3d;
+      padding: 1rem;
+      border-radius: 8px;
+      text-align: left;
+      overflow-x: auto;
+    }
+
+    .platform-tab { display: none; text-align: left; margin-top: 1rem; }
+    .platform-tab.active { display: block; }
+
+    .tab-buttons button {
+      margin: 0.3rem;
+      padding: 0.5rem 1rem;
+      background: #333;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .tab-buttons button:hover {
+      background: #444;
+    }
   </style>
 </head>
 <body>
-  <!-- Tombol Ganti Tema -->
+  <!-- Tema -->
   <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
 
+  <!-- Judul -->
   <h1>SWPS</h1>
 
-  <!-- Status Server -->
+  <!-- Status -->
   <div class="card-button">
     <h2>Status Server</h2>
     <div class="status-online">🟢 ONLINE</div>
@@ -119,7 +154,6 @@
     <h2 style="background: linear-gradient(90deg, red, green, blue); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
       Download Host (vhost)
     </h2>
-    <p>Klik untuk download file host</p>
   </div>
 
   <!-- Copy Ptunnel -->
@@ -127,7 +161,6 @@
     <h2 style="background: linear-gradient(90deg, red, green, blue); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
       Copy Ptunnel
     </h2>
-    <p>Klik untuk salin link ptunnel</p>
   </div>
 
   <!-- Copy iOS Host -->
@@ -135,14 +168,64 @@
     <h2 style="background: linear-gradient(90deg, red, green, blue); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
       Copy iOS Host (Surge 5)
     </h2>
-    <p>Klik untuk salin host iOS</p>
   </div>
 
-  <!-- Watermark Footer -->
+  <!-- Host untuk Windows -->
+  <div class="section">
+    <h2>Host untuk Windows</h2>
+    <pre>
+91.134.85.13 growtopia1.com
+91.134.85.13 growtopia2.com
+91.134.85.13 www.growtopia1.com
+91.134.85.13 www.growtopia2.com
+    </pre>
+  </div>
+
+  <!-- Petunjuk Platform -->
+  <div class="section">
+    <h2>Petunjuk Platform</h2>
+    <div class="tab-buttons">
+      <button onclick="showTab('android')">Android</button>
+      <button onclick="showTab('ios')">iOS</button>
+      <button onclick="showTab('windows')">Windows</button>
+    </div>
+
+    <div id="android" class="platform-tab active">
+      <ol>
+        <li>Download Powertunnel: <a href="https://github.com/krlvm/PowerTunnel-Android/releases/download/v2.6.3/PowerTunnel.apk" target="_blank">PowerTunnel.apk</a></li>
+        <li>Klik tombol "Copy Ptunnel" di atas untuk salin link</li>
+        <li>Buka Powertunnel → klik ikon tiga garis → Host settings</li>
+        <li>Tempel URL host, ubah update period ke "on start"</li>
+        <li>Selesai, buka Growtopia dan login ke GTPS</li>
+      </ol>
+    </div>
+
+    <div id="ios" class="platform-tab">
+      <ol>
+        <li>Download app "Surge 5" dari App Store</li>
+        <li>Tekan "OK" → klik "Default.conf" → klik "IMPORT"</li>
+        <li>Salin URL dari tombol iOS di atas → OK → Done</li>
+        <li>Tekan SETUP dan izinkan konfigurasi VPN</li>
+        <li>Selesai, buka Growtopia dan konek ke GTPS</li>
+      </ol>
+    </div>
+
+    <div id="windows" class="platform-tab">
+      <ol>
+        <li>Tekan ⊞ Win+R → ketik: <code>C:\Windows\System32\drivers\etc</code></li>
+        <li>Edit file <code>hosts</code> dengan Notepad</li>
+        <li>Tambahkan IP dari atas</li>
+        <li>Simpan lalu buka Growtopia</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Watermark -->
   <div class="footer-info">
     © 2025 <strong>SWPS</strong>. Created by <strong>Azazil</strong>. Built on the <strong>Growsoft Platform</strong>.
   </div>
 
+  <!-- Script -->
   <script>
     function toggleTheme() {
       const body = document.body;
@@ -150,6 +233,14 @@
       body.classList.toggle('light');
       localStorage.setItem('theme', body.classList.contains('light') ? 'light' : 'dark');
       toggleBtn.textContent = body.classList.contains('light') ? '☀️' : '🌙';
+    }
+
+    function loadTheme() {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'light') {
+        document.body.classList.add('light');
+        document.querySelector('.theme-toggle').textContent = '☀️';
+      }
     }
 
     function copyToClipboard(text) {
@@ -160,12 +251,10 @@
       });
     }
 
-    function loadTheme() {
-      const savedTheme = localStorage.getItem('theme');
-      if (savedTheme === 'light') {
-        document.body.classList.add('light');
-        document.querySelector('.theme-toggle').textContent = '☀️';
-      }
+    function showTab(tabId) {
+      const tabs = document.querySelectorAll('.platform-tab');
+      tabs.forEach(tab => tab.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
     }
 
     loadTheme();
