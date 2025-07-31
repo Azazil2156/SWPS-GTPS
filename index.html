@@ -116,13 +116,13 @@
   <!-- Copy Ptunnel -->
   <div class="section">
     <h2 style="background: linear-gradient(90deg, red, green, blue); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Copy Ptunnel</h2>
-    <a href="https://growsoft.cc/android.txt" target="_blank" onclick="copied()">Klik di sini untuk salin ptunnel</a>
+    <button onclick="copyToClipboard('https://growsoft.cc/android.txt')">Klik di sini untuk salin ptunnel</button>
   </div>
 
   <!-- Copy iOS Host -->
   <div class="section">
     <h2 style="background: linear-gradient(90deg, red, green, blue); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Copy iOS Host (Surge 5)</h2>
-    <a href="https://growsoft.cc/ios.txt" target="_blank" onclick="copied()">Klik di sini untuk salin host iOS</a>
+    <button onclick="copyToClipboard('https://growsoft.cc/ios.txt')">Klik di sini untuk salin host iOS</button>
   </div>
 
   <!-- Hosts untuk Windows -->
@@ -175,6 +175,12 @@
     </div>
   </div>
 
+  <!-- Footer -->
+  <div class="section" style="font-size: 0.9rem; margin-top: 3rem; opacity: 0.8;">
+    © 2025 <strong>SWPS</strong>. Created by <strong>Azazil</strong>.<br>
+    Built on the <strong>Growsoft Platform</strong>.
+  </div>
+
   <!-- Script -->
   <script>
     function showTab(tabId) {
@@ -199,8 +205,12 @@
       }
     }
 
-    function copied() {
-      alert("✅ Link berhasil disalin!");
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        alert("✅ Link berhasil disalin:\n" + text);
+      }, () => {
+        alert("❌ Gagal menyalin link");
+      });
     }
 
     loadTheme();
