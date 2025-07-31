@@ -1,75 +1,209 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-    <title>SWPS</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f5f5f5;
-            color: #333;
-        }
-        h1 {
-            color: #0066cc;
-        }
-        .server-status {
-            color: #00aa00;
-            font-weight: bold;
-        }
-        .section {
-            margin-bottom: 30px;
-            padding: 15px;
-            background-color: white;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        button {
-            background-color: #0066cc;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            margin: 5px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0055aa;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SWPS - GTPS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rammetto+One&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #121212;
+      --text-color: white;
+      --section-bg: #1e1e2e;
+      --accent-color: cyan;
+    }
+    body.light {
+      --bg-color: #f5f5f5;
+      --text-color: #111;
+      --section-bg: #ffffff;
+      --accent-color: #007bff;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--bg-color);
+      color: var(--text-color);
+      margin: 0;
+      padding: 2rem;
+      text-align: center;
+      transition: background 0.5s, color 0.5s;
+    }
+    h1 {
+      font-family: 'Rammetto One', cursive;
+      font-size: 3rem;
+      background: linear-gradient(90deg, blue, blue, cyan);
+      background-size: 300% 300%;
+      animation: colorShift 5s infinite;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5em;
+    }
+    @keyframes colorShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .section {
+      background: var(--section-bg);
+      padding: 1.5rem;
+      margin: 1.5rem auto;
+      border-radius: 12px;
+      max-width: 700px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    a {
+      color: var(--accent-color);
+      font-weight: bold;
+      text-decoration: none;
+    }
+    pre {
+      background: #2c2c3d;
+      padding: 1rem;
+      border-radius: 8px;
+      text-align: left;
+      overflow-x: auto;
+    }
+    button {
+      margin: 0.3rem;
+      padding: 0.5rem 1rem;
+      background: #333;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .status-online {
+      color: lime;
+      animation: blink 1s infinite alternate;
+    }
+    @keyframes blink {
+      0% { opacity: 1; }
+      100% { opacity: 0.5; }
+    }
+    .platform-tab { display: none; text-align: left; margin-top: 1rem; }
+    .platform-tab.active { display: block; }
+
+    /* Toggle Theme Button */
+    .theme-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background: transparent;
+      font-size: 1.5rem;
+    }
+  </style>
 </head>
 <body>
-    <h1>SWPS</h1>
-    
-    <div class="section">
-        <p class="server-status">Server Status: Online</p>
+  <!-- Tombol Ganti Tema -->
+  <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+
+  <h1>SWPS</h1>
+
+  <!-- Status Server -->
+  <div class="section">
+    <h2>Status Server</h2>
+    <div id="server-status" class="status-online">🟢 ONLINE</div>
+  </div>
+
+  <!-- Download Vhost -->
+  <div class="section">
+    <h2 style="background: linear-gradient(90deg, red, green, blue); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Download Host (vhost)</h2>
+    <a href="https://www.mediafire.com/file/ntm350bmfbq9fi8/SWPS.txt/file" target="_blank">Klik di sini untuk download</a>
+  </div>
+
+  <!-- Copy Ptunnel -->
+  <div class="section">
+    <h2 style="background: linear-gradient(90deg, red, green, blue); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Copy Ptunnel</h2>
+    <a href="https://growsoft.cc/android.txt" target="_blank" onclick="copied()">Klik di sini untuk salin ptunnel</a>
+  </div>
+
+  <!-- Copy iOS Host -->
+  <div class="section">
+    <h2 style="background: linear-gradient(90deg, red, green, blue); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Copy iOS Host (Surge 5)</h2>
+    <a href="https://growsoft.cc/ios.txt" target="_blank" onclick="copied()">Klik di sini untuk salin host iOS</a>
+  </div>
+
+  <!-- Hosts untuk Windows -->
+  <div class="section">
+    <h2>Host untuk Windows</h2>
+    <pre>
+91.134.85.13 growtopia1.com
+91.134.85.13 growtopia2.com
+91.134.85.13 www.growtopia1.com
+91.134.85.13 www.growtopia2.com
+    </pre>
+  </div>
+
+  <!-- Tab Platform -->
+  <div class="section">
+    <h2>Petunjuk Platform</h2>
+    <div>
+      <button onclick="showTab('android')">Android</button>
+      <button onclick="showTab('ios')">iOS</button>
+      <button onclick="showTab('windows')">Windows</button>
     </div>
 
-    <div class="section">
-        <h3><a href="https://www.mediafire.com/file/ntm350bmfbq9fi8/SWPS.txt/file" target="_blank">Download Host (VHost)</a></h3>
-        <a href="https://growsoft.cc/android.txt" target="_blank"><button>Launch with Trident</button></a>
-        <a href="https://growsoft.cc/ios.txt" target="_blank"><button>Copy iOS Host (Surge 5)</button></a>
-        
-        <p>91.134.85.13 growtopia1.com<br>
-        91.134.85.13 growtopia2.com<br>
-        91.134.85.13 www.growtopia1.com<br>
-        91.134.85.13 www.growtopia2.com</p>
+    <div id="android" class="platform-tab active">
+      <ol>
+        <li>Download Powertunnel: <a href="https://github.com/krlvm/PowerTunnel-Android/releases/download/v2.6.3/PowerTunnel.apk" target="_blank">PowerTunnel.apk</a></li>
+        <li>Klik tombol "Powertunnel" untuk menyalin link host</li>
+        <li>Buka aplikasi Powertunnel → klik ikon tiga garis → host settings</li>
+        <li>Tempel URL host, ubah update period ke "on start"</li>
+        <li>Selesai, buka Growtopia dan login ke GTPS</li>
+      </ol>
     </div>
 
-    <div class="section">
-        <h2>Android iOS Windows</h2>
-        <ol>
-            <li>First, download Powertunnel APP from here.</li>
-            <li>Click the "Launch with Trident" button above.</li>
-            <li>Open the Powertunnel app, tap the icon, then the icon.</li>
-            <li>Paste the copied URL and change "Update period" to "On start".</li>
-            <li>Enter server name: SWPS</li>
-        </ol>
+    <div id="ios" class="platform-tab">
+      <ol>
+        <li>Download app "Surge 5" dari App Store</li>
+        <li>Tekan "OK" → klik "Default.conf" → klik "IMPORT"</li>
+        <li>Salin URL dari tombol iOS di atas → OK → Done</li>
+        <li>Tekan SETUP dan izinkan konfigurasi VPN</li>
+        <li>Selesai, buka Growtopia dan konek ke GTPS</li>
+      </ol>
     </div>
 
-    <div class="section">
-        <h3>Your Connection</h3>
+    <div id="windows" class="platform-tab">
+      <ol>
+        <li>Tekan ⊞ Win+R → ketik: <code>C:\Windows\System32\drivers\etc</code></li>
+        <li>Edit file <code>hosts</code> dengan Notepad</li>
+        <li>Tambahkan IP dari atas</li>
+        <li>Simpan lalu buka Growtopia</li>
+      </ol>
     </div>
+  </div>
+
+  <!-- Script -->
+  <script>
+    function showTab(tabId) {
+      const tabs = document.querySelectorAll('.platform-tab');
+      tabs.forEach(tab => tab.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+    }
+
+    function toggleTheme() {
+      const body = document.body;
+      const toggleBtn = document.querySelector('.theme-toggle');
+      body.classList.toggle('light');
+      localStorage.setItem('theme', body.classList.contains('light') ? 'light' : 'dark');
+      toggleBtn.textContent = body.classList.contains('light') ? '☀️' : '🌙';
+    }
+
+    function loadTheme() {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'light') {
+        document.body.classList.add('light');
+        document.querySelector('.theme-toggle').textContent = '☀️';
+      }
+    }
+
+    function copied() {
+      alert("✅ Link berhasil disalin!");
+    }
+
+    loadTheme();
+  </script>
 </body>
 </html>
