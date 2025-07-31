@@ -1,72 +1,53 @@
-<!DOCTYPE html>
-<html lang="id">
+<!DOCTYPE html><html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SWPS - GTPS</title>
-
-  <!-- Google Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Rammetto+One&display=swap" rel="stylesheet">
-
+  <title>SWPS - GTPS</title>  <!-- Font & Styles -->  <link href="https://fonts.googleapis.com/css2?family=Rammetto+One&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
   <style>
+    * {
+      box-sizing: border-box;
+    }
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Orbitron', sans-serif;
       background: #121212;
       color: white;
       margin: 0;
       padding: 2rem;
       text-align: center;
+      position: relative;
     }
-
     h1 {
-      font-family: 'Rammetto One', cursive;
+      font-family: 'Rammetto One', sans-serif;
       font-size: 3rem;
-      color: #3498db; /* biru */
+      background: linear-gradient(90deg, #00f, #00f 50%, #00f);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: colorShift 5s infinite;
       margin-bottom: 0.5em;
     }
-
-    @keyframes blinkGreen {
-      0% { color: #00ff00; }
-      50% { color: #008000; }
-      100% { color: #00ff00; }
-    }
-
     @keyframes colorShift {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
-
     .section {
       background: #1e1e2e;
       padding: 1.5rem;
       margin: 1.5rem auto;
       border-radius: 12px;
       max-width: 700px;
+      box-shadow: 0 0 15px rgba(0,255,255,0.2);
     }
-
-    .colorful-box {
-      background: #1c1c2c;
-      border-radius: 10px;
-      padding: 1rem;
-      margin: 1rem auto;
-      max-width: 600px;
-    }
-
-    .colorful-box a {
-      display: inline-block;
-      background: linear-gradient(90deg, red, green, blue);
-      background-size: 300% 300%;
-      animation: colorShift 3s infinite;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    a {
+      color: cyan;
       font-weight: bold;
       text-decoration: none;
-      font-size: 1.2rem;
+      transition: 0.2s;
     }
-
+    a:hover {
+      color: #0ff;
+    }
     pre {
       background: #2c2c3d;
       padding: 1rem;
@@ -74,7 +55,6 @@
       text-align: left;
       overflow-x: auto;
     }
-
     button {
       margin: 0.3rem;
       padding: 0.5rem 1rem;
@@ -83,54 +63,59 @@
       border-radius: 6px;
       color: white;
       cursor: pointer;
+      transition: 0.2s;
     }
-
+    button:hover {
+      background-color: #444;
+      transform: scale(1.05);
+    }
     .status-online {
-      animation: blinkGreen 1s infinite;
+      color: lime;
       font-weight: bold;
-      font-size: 1.2rem;
+      animation: blink 1s infinite;
     }
-
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
     .platform-tab {
       display: none;
       text-align: left;
       margin-top: 1rem;
     }
-
     .platform-tab.active {
       display: block;
+    }
+    .rgb-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      background: linear-gradient(90deg, red, green, blue);
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: colorShift 5s infinite;
+    }
+    footer {
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      color: #888;
     }
   </style>
 </head>
 <body>
-  <h1>SWPS</h1>
-
-  <!-- Status Server -->
-  <div class="section">
+  <h1>SWPS</h1>  <!-- Status Server -->  <div class="section">
     <h2>Status Server</h2>
     <div id="server-status" class="status-online">🟢 ONLINE</div>
-  </div>
-
-  <!-- Vhost -->
-  <div class="colorful-box">
-    <h2>Download Host (vhost)</h2>
+  </div>  <!-- Download Sections -->  <div class="section">
+    <div class="rgb-title">Download Host (vhost)</div>
     <a href="https://www.mediafire.com/file/ntm350bmfbq9fi8/SWPS.txt/file" target="_blank">Klik di sini untuk download</a>
-  </div>
-
-  <!-- Ptunnel -->
-  <div class="colorful-box">
-    <h2>Copy Ptunnel</h2>
+  </div>  <div class="section">
+    <div class="rgb-title">Copy Ptunnel</div>
     <a href="https://growsoft.cc/android.txt" target="_blank">Klik di sini untuk salin ptunnel</a>
-  </div>
-
-  <!-- iOS Host -->
-  <div class="colorful-box">
-    <h2>Copy iOS Host (Surge 5)</h2>
+  </div>  <div class="section">
+    <div class="rgb-title">Copy iOS Host (Surge 5)</div>
     <a href="https://growsoft.cc/ios.txt" target="_blank">Klik di sini untuk salin host iOS</a>
-  </div>
-
-  <!-- Windows Hosts -->
-  <div class="section">
+  </div>  <div class="section">
     <h2>Host untuk Windows</h2>
     <pre>
 91.134.85.13 growtopia1.com
@@ -138,54 +123,51 @@
 91.134.85.13 www.growtopia1.com
 91.134.85.13 www.growtopia2.com
     </pre>
-  </div>
-
-  <!-- Tab Platform -->
-  <div class="section">
+  </div>  <!-- Tab Platform -->  <div class="section">
     <h2>Petunjuk Platform</h2>
     <div>
       <button onclick="showTab('android')">Android</button>
       <button onclick="showTab('ios')">iOS</button>
       <button onclick="showTab('windows')">Windows</button>
-    </div>
+    </div><div id="android" class="platform-tab active">
+  <ol>
+    <li>Download Powertunnel: <a href="https://github.com/krlvm/PowerTunnel-Android/releases/download/v2.6.3/PowerTunnel.apk" target="_blank">PowerTunnel.apk</a></li>
+    <li>Klik tombol "Powertunnel" untuk menyalin link host</li>
+    <li>Buka aplikasi Powertunnel → klik ikon tiga garis → host settings</li>
+    <li>Tempel URL host, ubah update period ke "on start"</li>
+    <li>Selesai, buka Growtopia dan login ke GTPS</li>
+  </ol>
+</div>
 
-    <div id="android" class="platform-tab active">
-      <ol>
-        <li>Download Powertunnel: <a href="https://github.com/krlvm/PowerTunnel-Android/releases/download/v2.6.3/PowerTunnel.apk" target="_blank">PowerTunnel.apk</a></li>
-        <li>Klik tombol "Powertunnel" untuk menyalin link host</li>
-        <li>Buka aplikasi Powertunnel → klik ikon tiga garis → host settings</li>
-        <li>Tempel URL host, ubah update period ke "on start"</li>
-        <li>Selesai, buka Growtopia dan login ke GTPS</li>
-      </ol>
-    </div>
+<div id="ios" class="platform-tab">
+  <ol>
+    <li>Download app "Surge 5" dari App Store</li>
+    <li>Tekan "OK" → klik "Default.conf" → klik "IMPORT"</li>
+    <li>Salin URL dari tombol iOS di atas → OK → Done</li>
+    <li>Tekan SETUP dan izinkan konfigurasi VPN</li>
+    <li>Selesai, buka Growtopia dan konek ke GTPS</li>
+  </ol>
+</div>
 
-    <div id="ios" class="platform-tab">
-      <ol>
-        <li>Download app "Surge 5" dari App Store</li>
-        <li>Tekan "OK" → klik "Default.conf" → klik "IMPORT"</li>
-        <li>Salin URL dari tombol iOS di atas → OK → Done</li>
-        <li>Tekan SETUP dan izinkan konfigurasi VPN</li>
-        <li>Selesai, buka Growtopia dan konek ke GTPS</li>
-      </ol>
-    </div>
+<div id="windows" class="platform-tab">
+  <ol>
+    <li>Tekan ⊞ Win+R → ketik: <code>C:\Windows\System32\drivers\etc</code></li>
+    <li>Edit file <code>hosts</code> dengan Notepad</li>
+    <li>Tambahkan IP dari atas</li>
+    <li>Simpan lalu buka Growtopia</li>
+  </ol>
+</div>
 
-    <div id="windows" class="platform-tab">
-      <ol>
-        <li>Tekan ⊞ Win+R → ketik: <code>C:\Windows\System32\drivers\etc</code></li>
-        <li>Edit file <code>hosts</code> dengan Notepad</li>
-        <li>Tambahkan IP dari atas</li>
-        <li>Simpan lalu buka Growtopia</li>
-      </ol>
-    </div>
-  </div>
-
-  <!-- Script -->
-  <script>
+  </div>  <!-- Footer -->  <footer>
+    &copy; 2025 SWPS GTPS. Dibuat oleh Admin SWPS. |
+    <a href="https://t.me/yourusername" target="_blank">Kontak Telegram</a>
+  </footer>  <!-- Optional music (disable sound by default) -->  <!-- <audio autoplay loop hidden>
+    <source src="musik.mp3" type="audio/mpeg">
+  </audio> -->  <script>
     function showTab(tabId) {
       const tabs = document.querySelectorAll('.platform-tab');
       tabs.forEach(tab => tab.classList.remove('active'));
       document.getElementById(tabId).classList.add('active');
     }
-  </script>
-</body>
+  </script></body>
 </html>
