@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="id">
+<!DOCTYPE html><html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -30,19 +29,18 @@
     h1 {
       font-family: 'Rammetto One', cursive;
       font-size: 3rem;
-      background: linear-gradient(90deg, blue, blue, cyan);
+      background: linear-gradient(90deg, blue, cyan);
       background-size: 300% 300%;
       animation: colorShift 5s infinite;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: 0.5em;
+      margin-bottom: 1em;
     }
     @keyframes colorShift {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
-
     .card-button {
       background: var(--section-bg);
       color: var(--text-color);
@@ -57,23 +55,19 @@
       cursor: pointer;
       transition: background 0.3s, transform 0.2s;
     }
-
     .card-button:hover {
       background: #2a2a3a;
       transform: scale(1.01);
     }
-
     .status-online {
       color: lime;
       font-weight: bold;
       animation: blink 1s infinite alternate;
     }
-
     @keyframes blink {
       0% { opacity: 1; }
       100% { opacity: 0.5; }
     }
-
     .theme-toggle {
       position: fixed;
       top: 1rem;
@@ -84,7 +78,6 @@
       color: var(--text-color);
       cursor: pointer;
     }
-
     .footer-info {
       position: fixed;
       bottom: 10px;
@@ -100,7 +93,6 @@
     body.light .footer-info {
       color: rgba(0, 0, 0, 0.35);
     }
-
     .section {
       background: var(--section-bg);
       padding: 1.5rem;
@@ -109,7 +101,6 @@
       max-width: 800px;
       box-shadow: 0 0 10px rgba(0,0,0,0.2);
     }
-
     pre {
       background: #2c2c3d;
       padding: 1rem;
@@ -117,10 +108,8 @@
       text-align: left;
       overflow-x: auto;
     }
-
     .platform-tab { display: none; text-align: left; margin-top: 1rem; }
     .platform-tab.active { display: block; }
-
     .tab-buttons button {
       margin: 0.3rem;
       padding: 0.5rem 1rem;
@@ -137,41 +126,23 @@
   </style>
 </head>
 <body>
-  <!-- Tema -->
   <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
-
-  <!-- Judul -->
-  <h1>SWPS</h1>
-
-  <!-- Status -->
-  <div class="card-button">
+  <h1>SWPS</h1>  <div class="card-button">
     <h2>Status Server</h2>
-    <div class="status-online">🟢 ONLINE</div>
-  </div>
-
-  <!-- Download Vhost -->
-  <div class="card-button" onclick="window.open('https://www.mediafire.com/file/ntm350bmfbq9fi8/SWPS.txt/file', '_blank')">
+    <div class="status-online">🟢 Server Status: Online</div>
+  </div>  <div class="card-button" onclick="window.open('https://www.mediafire.com/file/ntm350bmfbq9fi8/SWPS.txt/file', '_blank')">
     <h2 style="background: linear-gradient(90deg, red, green, blue); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
       Download Host (vhost)
     </h2>
-  </div>
-
-  <!-- Copy Ptunnel -->
-  <div class="card-button" onclick="copyToClipboard('https://growsoft.cc/android.txt')">
+  </div>  <div class="card-button" onclick="copyToClipboard('https://growsoft.cc/android.txt')">
     <h2 style="background: linear-gradient(90deg, red, green, blue); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
       Copy Ptunnel
     </h2>
-  </div>
-
-  <!-- Copy iOS Host -->
-  <div class="card-button" onclick="copyToClipboard('https://growsoft.cc/ios.txt')">
+  </div>  <div class="card-button" onclick="copyToClipboard('https://growsoft.cc/ios.txt')">
     <h2 style="background: linear-gradient(90deg, red, green, blue); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
       Copy iOS Host (Surge 5)
     </h2>
-  </div>
-
-  <!-- Host untuk Windows -->
-  <div class="section">
+  </div>  <div class="section">
     <h2>Host untuk Windows</h2>
     <pre>
 91.134.85.13 growtopia1.com
@@ -179,54 +150,44 @@
 91.134.85.13 www.growtopia1.com
 91.134.85.13 www.growtopia2.com
     </pre>
-  </div>
-
-  <!-- Petunjuk Platform -->
-  <div class="section">
+  </div>  <div class="section">
     <h2>Petunjuk Platform</h2>
     <div class="tab-buttons">
       <button onclick="showTab('android')">Android</button>
       <button onclick="showTab('ios')">iOS</button>
       <button onclick="showTab('windows')">Windows</button>
-    </div>
+    </div><div id="android" class="platform-tab active">
+  <ol>
+    <li>Download Powertunnel: <a href="https://github.com/krlvm/PowerTunnel-Android/releases/download/v2.6.3/PowerTunnel.apk" target="_blank">PowerTunnel.apk</a></li>
+    <li>Klik tombol "Copy Ptunnel" di atas untuk salin link</li>
+    <li>Buka Powertunnel → klik ikon tiga garis → Host settings</li>
+    <li>Tempel URL host, ubah update period ke "on start"</li>
+    <li>Selesai, buka Growtopia dan login ke GTPS</li>
+  </ol>
+</div>
 
-    <div id="android" class="platform-tab active">
-      <ol>
-        <li>Download Powertunnel: <a href="https://github.com/krlvm/PowerTunnel-Android/releases/download/v2.6.3/PowerTunnel.apk" target="_blank">PowerTunnel.apk</a></li>
-        <li>Klik tombol "Copy Ptunnel" di atas untuk salin link</li>
-        <li>Buka Powertunnel → klik ikon tiga garis → Host settings</li>
-        <li>Tempel URL host, ubah update period ke "on start"</li>
-        <li>Selesai, buka Growtopia dan login ke GTPS</li>
-      </ol>
-    </div>
+<div id="ios" class="platform-tab">
+  <ol>
+    <li>Download app "Surge 5" dari App Store</li>
+    <li>Tekan "OK" → klik "Default.conf" → klik "IMPORT"</li>
+    <li>Salin URL dari tombol iOS di atas → OK → Done</li>
+    <li>Tekan SETUP dan izinkan konfigurasi VPN</li>
+    <li>Selesai, buka Growtopia dan konek ke GTPS</li>
+  </ol>
+</div>
 
-    <div id="ios" class="platform-tab">
-      <ol>
-        <li>Download app "Surge 5" dari App Store</li>
-        <li>Tekan "OK" → klik "Default.conf" → klik "IMPORT"</li>
-        <li>Salin URL dari tombol iOS di atas → OK → Done</li>
-        <li>Tekan SETUP dan izinkan konfigurasi VPN</li>
-        <li>Selesai, buka Growtopia dan konek ke GTPS</li>
-      </ol>
-    </div>
+<div id="windows" class="platform-tab">
+  <ol>
+    <li>Tekan ⊞ Win+R → ketik: <code>C:\Windows\System32\drivers\etc</code></li>
+    <li>Edit file <code>hosts</code> dengan Notepad</li>
+    <li>Tambahkan IP dari atas</li>
+    <li>Simpan lalu buka Growtopia</li>
+  </ol>
+</div>
 
-    <div id="windows" class="platform-tab">
-      <ol>
-        <li>Tekan ⊞ Win+R → ketik: <code>C:\Windows\System32\drivers\etc</code></li>
-        <li>Edit file <code>hosts</code> dengan Notepad</li>
-        <li>Tambahkan IP dari atas</li>
-        <li>Simpan lalu buka Growtopia</li>
-      </ol>
-    </div>
-  </div>
-
-  <!-- Watermark -->
-  <div class="footer-info">
+  </div>  <div class="footer-info">
     © 2025 <strong>SWPS</strong>. Created by <strong>Azazil</strong>. Built on the <strong>Growsoft Platform</strong>.
-  </div>
-
-  <!-- Script -->
-  <script>
+  </div>  <script>
     function toggleTheme() {
       const body = document.body;
       const toggleBtn = document.querySelector('.theme-toggle');
@@ -234,7 +195,6 @@
       localStorage.setItem('theme', body.classList.contains('light') ? 'light' : 'dark');
       toggleBtn.textContent = body.classList.contains('light') ? '☀️' : '🌙';
     }
-
     function loadTheme() {
       const savedTheme = localStorage.getItem('theme');
       if (savedTheme === 'light') {
@@ -242,7 +202,6 @@
         document.querySelector('.theme-toggle').textContent = '☀️';
       }
     }
-
     function copyToClipboard(text) {
       navigator.clipboard.writeText(text).then(() => {
         alert("✅ Link berhasil disalin:\n" + text);
@@ -250,14 +209,11 @@
         alert("❌ Gagal menyalin link");
       });
     }
-
     function showTab(tabId) {
       const tabs = document.querySelectorAll('.platform-tab');
       tabs.forEach(tab => tab.classList.remove('active'));
       document.getElementById(tabId).classList.add('active');
     }
-
     loadTheme();
-  </script>
-</body>
+  </script></body>
 </html>
