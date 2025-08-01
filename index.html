@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="id">
+<!DOCTYPE html>
+<html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -156,13 +157,22 @@
       <option value="id">🇮🇩 Indonesia</option>
       <option value="en">🇬🇧 English</option>
     </select>
-  </div><button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+  </div>
 
-  <h1 id="title">SWPS</h1>  <div class="status-box">
+  <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+  <h1 id="title">SWPS</h1>
+
+  <div class="status-box">
     <div class="status-online" id="statusText">🟢 Server Status: Online</div>
-  </div>  <!-- ...seluruh konten tetap... -->  <div class="footer-info" id="footerText">
+  </div>
+
+  <!-- ...seluruh konten tetap... -->
+
+  <div class="footer-info" id="footerText">
     © 2025 <strong>SWPS</strong>. Created by <strong>Azazil</strong>. Built on the <strong>Growsoft Platform</strong>.
-  </div>  <script>
+  </div>
+
+  <script>
     const langData = {
       id: {
         title: "SWPS",
@@ -217,5 +227,6 @@
     }
     loadTheme();
     loadLanguage();
-  </script></body>
+  </script>
+</body>
 </html>
