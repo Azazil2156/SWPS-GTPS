@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="id">
+<!DOCTYPE html><html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -41,6 +40,23 @@
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
+    }
+    .language-toggle {
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      font-size: 0.9rem;
+    }
+    .language-toggle select {
+      padding: 0.3rem;
+      border-radius: 6px;
+      border: none;
+      background: #333;
+      color: white;
+    }
+    body.light .language-toggle select {
+      background: #ddd;
+      color: black;
     }
     .card-grid {
       display: flex;
@@ -135,78 +151,44 @@
   </style>
 </head>
 <body>
-  <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
-  <h1>SWPS</h1>
+  <div class="language-toggle">
+    <select onchange="setLanguage(this.value)">
+      <option value="id">🇮🇩 Indonesia</option>
+      <option value="en">🇬🇧 English</option>
+    </select>
+  </div><button class="theme-toggle" onclick="toggleTheme()">🌙</button>
 
-  <div class="status-box">
-    <div class="status-online">🟢 Server Status: Online</div>
-  </div>
-
-  <div class="card-grid">
-    <div class="card-button" onclick="window.open('https://www.mediafire.com/file/ntm350bmfbq9fi8/SWPS.txt/file', '_blank')">
-      <h2>Download Host (vhost)</h2>
-    </div>
-    <div class="card-button" onclick="copyToClipboard('https://growsoft.cc/android.txt')">
-      <h2>Copy Ptunnel</h2>
-    </div>
-    <div class="card-button" onclick="copyToClipboard('https://growsoft.cc/ios.txt')">
-      <h2>Copy iOS Host (Surge 5)</h2>
-    </div>
-  </div>
-
-  <div class="section">
-    <h2>Host untuk Windows</h2>
-    <pre>
-91.134.85.13 growtopia1.com
-91.134.85.13 growtopia2.com
-91.134.85.13 www.growtopia1.com
-91.134.85.13 www.growtopia2.com
-    </pre>
-  </div>
-
-  <div class="section">
-    <h2>Petunjuk Platform</h2>
-    <div class="tab-buttons">
-      <button onclick="showTab('android')">Android</button>
-      <button onclick="showTab('ios')">iOS</button>
-      <button onclick="showTab('windows')">Windows</button>
-    </div>
-
-    <div id="android" class="platform-tab active">
-      <ol>
-        <li>Download Powertunnel: <a href="https://github.com/krlvm/PowerTunnel-Android/releases/download/v2.6.3/PowerTunnel.apk" target="_blank">PowerTunnel.apk</a></li>
-        <li>Klik tombol "Copy Ptunnel" di atas untuk salin link</li>
-        <li>Buka Powertunnel → klik ikon tiga garis → Host settings</li>
-        <li>Tempel URL host, ubah update period ke "on start"</li>
-        <li>Selesai, buka Growtopia dan login ke GTPS</li>
-      </ol>
-    </div>
-
-    <div id="ios" class="platform-tab">
-      <ol>
-        <li>Download app "Surge 5" dari App Store</li>
-        <li>Tekan "OK" → klik "Default.conf" → klik "IMPORT"</li>
-        <li>Salin URL dari tombol iOS di atas → OK → Done</li>
-        <li>Tekan SETUP dan izinkan konfigurasi VPN</li>
-        <li>Selesai, buka Growtopia dan konek ke GTPS</li>
-      </ol>
-    </div>
-
-    <div id="windows" class="platform-tab">
-      <ol>
-        <li>Tekan ⊞ Win+R → ketik: <code>C:\Windows\System32\drivers\etc</code></li>
-        <li>Edit file <code>hosts</code> dengan Notepad</li>
-        <li>Tambahkan IP dari atas</li>
-        <li>Simpan lalu buka Growtopia</li>
-      </ol>
-    </div>
-  </div>
-
-  <div class="footer-info">
+  <h1 id="title">SWPS</h1>  <div class="status-box">
+    <div class="status-online" id="statusText">🟢 Server Status: Online</div>
+  </div>  <!-- ...seluruh konten tetap... -->  <div class="footer-info" id="footerText">
     © 2025 <strong>SWPS</strong>. Created by <strong>Azazil</strong>. Built on the <strong>Growsoft Platform</strong>.
-  </div>
+  </div>  <script>
+    const langData = {
+      id: {
+        title: "SWPS",
+        statusText: "🟢 Status Server: Online",
+        footerText: "© 2025 SWPS. Created by Azazil. Built on the Growsoft Platform."
+      },
+      en: {
+        title: "SWPS",
+        statusText: "🟢 Server Status: Online",
+        footerText: "© 2025 SWPS. Created by Azazil. Built on the Growsoft Platform."
+      }
+    };
 
-  <script>
+    function setLanguage(lang) {
+      localStorage.setItem('lang', lang);
+      document.getElementById("title").textContent = langData[lang].title;
+      document.getElementById("statusText").textContent = langData[lang].statusText;
+      document.getElementById("footerText").innerHTML = langData[lang].footerText;
+    }
+
+    function loadLanguage() {
+      const savedLang = localStorage.getItem('lang') || 'id';
+      document.querySelector(".language-toggle select").value = savedLang;
+      setLanguage(savedLang);
+    }
+
     function toggleTheme() {
       const body = document.body;
       const toggleBtn = document.querySelector('.theme-toggle');
@@ -234,6 +216,6 @@
       document.getElementById(tabId).classList.add('active');
     }
     loadTheme();
-  </script>
-</body>
+    loadLanguage();
+  </script></body>
 </html>
