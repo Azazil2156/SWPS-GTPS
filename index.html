@@ -7,99 +7,88 @@
   <link href="https://fonts.googleapis.com/css2?family=Rammetto+One&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-color: #121212;
+      --bg-color: #0f172a;
       --text-color: white;
-      --section-bg: #1e1e2e;
+      --section-bg: #1e293b;
       --accent-color: cyan;
+      --card-gradient: linear-gradient(135deg, #00bcd4, #4caf50);
     }
     body.light {
-      --bg-color: #f5f5f5;
+      --bg-color: #f8fafc;
       --text-color: #111;
       --section-bg: #ffffff;
       --accent-color: #007bff;
+      --card-gradient: linear-gradient(135deg, #00bcd4, #2196f3);
     }
     body {
       font-family: Arial, sans-serif;
       background: var(--bg-color);
       color: var(--text-color);
       margin: 0;
-      padding: 2rem 1rem 5rem;
+      padding: 1rem 1rem 5rem;
       text-align: center;
       transition: background 0.5s, color 0.5s;
     }
     h1 {
       font-family: 'Rammetto One', cursive;
       font-size: 3rem;
-      background: linear-gradient(90deg, blue, cyan);
-      background-size: 300% 300%;
-      animation: colorShift 5s infinite;
+      background: linear-gradient(90deg, #00bcd4, #4caf50);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: 2rem;
+      margin-bottom: 1rem;
     }
-    @keyframes colorShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    .language-toggle {
-      position: fixed;
-      top: 1rem;
-      left: 1rem;
-      font-size: 0.9rem;
-    }
-    .language-toggle select {
-      padding: 0.3rem;
-      border-radius: 6px;
-      border: none;
-      background: #333;
-      color: white;
-    }
-    body.light .language-toggle select {
-      background: #ddd;
-      color: black;
+    .status-box {
+      margin-bottom: 1.5rem;
+      font-weight: bold;
+      color: lime;
     }
     .card-grid {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1.5rem;
-      margin-bottom: 2rem;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 400px;
+      margin: auto;
     }
     .card-button {
-      background: var(--section-bg);
-      color: var(--text-color);
+      background: var(--card-gradient);
+      border: none;
+      color: white;
+      font-size: 1rem;
+      padding: 1rem;
       border-radius: 12px;
-      padding: 2rem;
-      width: 260px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
-      text-align: center;
       cursor: pointer;
-      transition: background 0.3s, transform 0.2s;
+      transition: transform 0.2s;
     }
     .card-button:hover {
-      background: #2a2a3a;
       transform: scale(1.03);
     }
-    .card-button h2 {
-      font-size: 1.2rem;
-      margin: 0;
-      background: linear-gradient(90deg, red, green, blue);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    .section {
+      background: var(--section-bg);
+      padding: 1rem;
+      margin: 2rem auto;
+      border-radius: 12px;
+      max-width: 700px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
     }
-    .status-box {
-      margin-bottom: 2rem;
+    .tab-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
     }
-    .status-online {
-      color: lime;
-      font-weight: bold;
-      animation: blink 1s infinite alternate;
+    .tab-buttons button {
+      background: #334155;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
     }
-    @keyframes blink {
-      0% { opacity: 1; }
-      100% { opacity: 0.5; }
+    .tab-buttons button:hover {
+      background: #475569;
     }
+    .platform-tab { display: none; text-align: left; margin-top: 1rem; }
+    .platform-tab.active { display: block; }
     .theme-toggle {
       position: fixed;
       top: 1rem;
@@ -110,95 +99,90 @@
       color: var(--text-color);
       cursor: pointer;
     }
-    .section {
-      background: var(--section-bg);
-      padding: 1.5rem;
-      margin: 1.5rem auto;
-      border-radius: 12px;
-      max-width: 800px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    }
     pre {
-      background: #2c2c3d;
+      background: #1e293b;
       padding: 1rem;
-      border-radius: 8px;
-      text-align: left;
+      color: #fff;
       overflow-x: auto;
-    }
-    .platform-tab { display: none; text-align: left; margin-top: 1rem; }
-    .platform-tab.active { display: block; }
-    .tab-buttons button {
-      margin: 0.3rem;
-      padding: 0.5rem 1rem;
-      background: #333;
-      border: none;
-      border-radius: 6px;
-      color: white;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    .tab-buttons button:hover {
-      background: #444;
+      border-radius: 8px;
     }
     .footer-info {
       margin-top: 4rem;
       font-size: 0.8rem;
-      color: rgba(255, 255, 255, 0.35);
-      text-align: center;
+      color: rgba(255,255,255,0.35);
     }
     body.light .footer-info {
-      color: rgba(0, 0, 0, 0.35);
+      color: rgba(0,0,0,0.35);
     }
   </style>
 </head>
 <body>
-  <div class="language-toggle">
-    <select onchange="setLanguage(this.value)">
-      <option value="id">🇮🇩 Indonesia</option>
-      <option value="en">🇬🇧 English</option>
-    </select>
-  </div>
-
   <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
-  <h1 id="title">SWPS</h1>
+  <h1>SWPS</h1>
 
   <div class="status-box">
-    <div class="status-online" id="statusText">🟢 Server Status: Online</div>
+    🟢 Status Server: Online
   </div>
 
-  <!-- ...seluruh konten tetap... -->
+  <div class="card-grid">
+    <button class="card-button" onclick="window.open('https://www.mediafire.com/file/ntm350bmfbq9fi8/SWPS.txt/file', '_blank')">Download Host (VHost)</button>
+    <button class="card-button" onclick="copyToClipboard('https://growsoft.cc/android.txt')">Copy Ptunnel</button>
+    <button class="card-button" onclick="copyToClipboard('https://growsoft.cc/ios.txt')">Copy iOS Host (Surge 5)</button>
+  </div>
 
-  <div class="footer-info" id="footerText">
-    © 2025 <strong>SWPS</strong>. Created by <strong>Azazil</strong>. Built on the <strong>Growsoft Platform</strong>.
+  <div class="section">
+    <h2>Host untuk Windows</h2>
+    <pre>
+91.134.85.13 growtopia1.com
+91.134.85.13 growtopia2.com
+91.134.85.13 www.growtopia1.com
+91.134.85.13 www.growtopia2.com
+    </pre>
+  </div>
+
+  <div class="section">
+    <h2>Petunjuk Platform</h2>
+    <div class="tab-buttons">
+      <button onclick="showTab('android')">Android</button>
+      <button onclick="showTab('ios')">iOS</button>
+      <button onclick="showTab('windows')">Windows</button>
+    </div>
+
+    <div id="android" class="platform-tab active">
+      <ol>
+        <li>Download Powertunnel: <a href="https://github.com/krlvm/PowerTunnel-Android/releases/download/v2.6.3/PowerTunnel.apk" target="_blank">PowerTunnel.apk</a></li>
+        <li>Klik tombol "Copy Ptunnel" di atas</li>
+        <li>Buka Powertunnel → klik ikon tiga garis → Host settings</li>
+        <li>Tempel URL host, ubah update period ke "on start"</li>
+        <li>Selesai, buka Growtopia dan login ke GTPS</li>
+      </ol>
+    </div>
+
+    <div id="ios" class="platform-tab">
+      <ol>
+        <li>Download app "Surge 5" dari App Store</li>
+        <li>Tekan "OK" → klik "Default.conf" → klik "IMPORT"</li>
+        <li>Salin URL dari tombol iOS di atas → OK → Done</li>
+        <li>Tekan SETUP dan izinkan konfigurasi VPN</li>
+        <li>Selesai, buka Growtopia dan konek ke GTPS</li>
+      </ol>
+    </div>
+
+    <div id="windows" class="platform-tab">
+      <ol>
+        <li>Tekan ⊞ Win+R → ketik: <code>C:\Windows\System32\drivers\etc</code></li>
+        <li>Edit file <code>hosts</code> dengan Notepad</li>
+        <li>Tambahkan IP dari atas</li>
+        <li>Simpan lalu buka Growtopia</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="footer-info">
+    © 2025 SWPS. Created by Azazil. Built on the Growsoft Platform.
   </div>
 
   <script>
-    const langData = {
-      id: {
-        title: "SWPS",
-        statusText: "🟢 Status Server: Online",
-        footerText: "© 2025 SWPS. Created by Azazil. Built on the Growsoft Platform."
-      },
-      en: {
-        title: "SWPS",
-        statusText: "🟢 Server Status: Online",
-        footerText: "© 2025 SWPS. Created by Azazil. Built on the Growsoft Platform."
-      }
-    };
-
-    function setLanguage(lang) {
-      localStorage.setItem('lang', lang);
-      document.getElementById("title").textContent = langData[lang].title;
-      document.getElementById("statusText").textContent = langData[lang].statusText;
-      document.getElementById("footerText").innerHTML = langData[lang].footerText;
-    }
-
-    function loadLanguage() {
-      const savedLang = localStorage.getItem('lang') || 'id';
-      document.querySelector(".language-toggle select").value = savedLang;
-      setLanguage(savedLang);
-    }
-
     function toggleTheme() {
       const body = document.body;
       const toggleBtn = document.querySelector('.theme-toggle');
@@ -226,7 +210,6 @@
       document.getElementById(tabId).classList.add('active');
     }
     loadTheme();
-    loadLanguage();
   </script>
 </body>
 </html>
